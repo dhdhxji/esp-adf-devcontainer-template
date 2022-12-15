@@ -1,4 +1,4 @@
-FROM espressif/idf
+FROM espressif/idf:release-v4.4
 
 ARG DEBIAN_FRONTEND=nointeractive
 
@@ -31,16 +31,9 @@ RUN wget --no-verbose ${QEMU_URL} \
 
 ENV PATH=/opt/qemu/bin:${PATH}
 
-ENV ADF_REL=2.4.1
-ENV ADF_SHA256=51528b3c60991184da4455d57f8f372ed2c57bf4d0ae981ac5b94eef0a3d2457
-ENV ADF_DIST=v${ADF_REL}.tar.gz
-ENV ADF_URL=https://github.com/espressif/esp-adf/archive/refs/tags/${ADF_DIST}
-
-RUN wget --no-verbose ${ADF_URL} \
-  && echo "${ADF_SHA256} ${ADF_DIST}" | sha256sum --check --strict - \
-  && tar -xf $ADF_DIST -C /opt
-
-ENV ADF_PATH=/opt/esp-adf-$ADF_REL
+ENV ADF_REL=v2.4.1
+RUN git clone --recursive --depth 1 --branch $ADF_REL https://github.com/espressif/esp-adf.git /opt/esp/adf
+ENV ADF_PATH=/opt/esp/adf
 
 RUN echo "source /opt/esp/idf/export.sh > /dev/null 2>&1" >> ~/.bashrc
 
