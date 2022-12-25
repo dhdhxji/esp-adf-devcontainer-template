@@ -24,7 +24,9 @@
 		"idf.pythonBinPath": "/opt/esp/python_env/idf4.4_py3.8_env/bin/python",
 		"idf.toolsPath": "/opt/esp",
 		"idf.gitPath": "/usr/bin/git",
-		"idf.espAdfPath": "${env:ADF_PATH}"
+		"idf.espAdfPath": "${env:ADF_PATH}",
+		"idf.flashType": "UART",
+		"idf.port": "/dev/ttyUSB0"
 	},
 	"runArgs": ["--privileged"]
 }
